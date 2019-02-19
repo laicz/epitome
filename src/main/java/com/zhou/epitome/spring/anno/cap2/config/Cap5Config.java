@@ -6,7 +6,7 @@ package com.zhou.epitome.spring.anno.cap2.config;
 
 import com.zhou.epitome.spring.anno.cap2.condition.LinuxCondition;
 import com.zhou.epitome.spring.anno.cap2.condition.WindowCondition;
-import com.zhou.epitome.spring.bean.Person;
+import com.zhou.epitome.spring.anno.cap2.bean.Person;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;

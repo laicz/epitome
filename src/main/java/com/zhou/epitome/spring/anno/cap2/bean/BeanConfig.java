@@ -2,7 +2,7 @@
  * Date:     2019/2/1823:06
  * AUTHOR:   Administrator
  */
-package com.zhou.epitome.spring.bean;
+package com.zhou.epitome.spring.anno.cap2.bean;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

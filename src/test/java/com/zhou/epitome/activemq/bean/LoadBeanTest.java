@@ -4,7 +4,7 @@
  */
 package com.zhou.epitome.activemq.bean;
 
-import com.zhou.epitome.spring.bean.BeanConfig;
+import com.zhou.epitome.spring.anno.cap2.bean.BeanConfig;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**

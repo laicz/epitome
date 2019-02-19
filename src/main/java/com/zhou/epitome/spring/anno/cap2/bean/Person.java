@@ -2,7 +2,7 @@
  * Date:     2019/2/1822:57
  * AUTHOR:   Administrator
  */
-package com.zhou.epitome.spring.bean;
+package com.zhou.epitome.spring.anno.cap2.bean;
 
 /**
  * 2019/2/18  22:57

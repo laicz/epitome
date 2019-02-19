@@ -5,7 +5,7 @@
 package com.zhou.epitome.spring.anno.cap2.config;
 
 import com.zhou.epitome.spring.anno.cap2.anno.MyImport;
-import com.zhou.epitome.spring.bean.Person;
+import com.zhou.epitome.spring.anno.cap2.bean.Person;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.*;
 
