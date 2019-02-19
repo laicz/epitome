@@ -4,19 +4,17 @@
  */
 package com.zhou.epitome.spring.anno.cap2.config;
 
+import com.zhou.epitome.spring.anno.cap2.anno.MyImport;
 import com.zhou.epitome.spring.bean.Person;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.*;
 
 /**
  * 2019/2/19  20:51
  * created by zhoumb
  */
 @Configuration
-@ComponentScan(basePackages = "com.zhou.epitome.spring.anno.cap2")
+@ComponentScan(basePackages = "com.zhou.epitome.spring.anno.cap2", includeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION, value = MyImport.class)})
 public class ScopeConfig {
 
     @Bean
