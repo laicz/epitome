@@ -5,6 +5,8 @@
 package com.zhou.epitome.spring.anno.cap2.cust_filter;
 
 
+import org.springframework.core.io.Resource;
+import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.core.type.ClassMetadata;
 import org.springframework.core.type.classreading.MetadataReader;
 import org.springframework.core.type.classreading.MetadataReaderFactory;
@@ -18,10 +20,23 @@ import java.io.IOException;
  * created by zhoumb
  */
 public class MyCustomeFilterType implements TypeFilter {
+    /**
+     * 根据类的信息决定是否加载到spring 容器中
+     *
+     * @param metadataReader        读取当前正在扫描类的信息
+     * @param metadataReaderFactory 可以获取到其它任何类的信息
+     * @return
+     * @throws IOException
+     */
     @Override
     public boolean match(MetadataReader metadataReader, MetadataReaderFactory metadataReaderFactory) throws IOException {
+        //获取类的信息
         ClassMetadata classMetadata = metadataReader.getClassMetadata();
-        metadataReaderFactory.getMetadataReader()
-        return false;
+        //获取类使用的注解
+        AnnotationMetadata annotationMetadata = metadataReader.getAnnotationMetadata();
+        //获取当前类的资源信息
+        Resource resource = metadataReader.getResource();
+        System.out.println("---------->" + classMetadata.getClassName());
+        return classMetadata.getClassName().contains("Enable");
     }
 }
