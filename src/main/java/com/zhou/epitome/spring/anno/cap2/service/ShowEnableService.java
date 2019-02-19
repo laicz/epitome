@@ -4,6 +4,9 @@
  */
 package com.zhou.epitome.spring.anno.cap2.service;
 
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,5 +14,6 @@ import org.springframework.stereotype.Service;
  * created by zhoumb
  */
 @Service
+@Scope(scopeName = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class ShowEnableService {
 }
