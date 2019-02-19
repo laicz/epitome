@@ -2,7 +2,7 @@
  * Date:     2019/2/1920:26
  * AUTHOR:   Administrator
  */
-package com.zhou.epitome.anno.cap2.cust_filter;
+package com.zhou.epitome.spring.anno.cap2.cust_filter;
 
 
 import org.springframework.core.type.ClassMetadata;
@@ -13,7 +13,7 @@ import org.springframework.core.type.filter.TypeFilter;
 import java.io.IOException;
 
 /**
- * 实现自定义的
+ * 实现自定义的的TypeFilter,用于@ComponentScan使用
  * 2019/2/19  20:26
  * created by zhoumb
  */

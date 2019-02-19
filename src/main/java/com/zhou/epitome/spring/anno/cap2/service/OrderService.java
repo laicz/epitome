@@ -2,7 +2,7 @@
  * Date:     2019/2/1823:17
  * AUTHOR:   Administrator
  */
-package com.zhou.epitome.anno.cap2.service;
+package com.zhou.epitome.spring.anno.cap2.service;
 
 import org.springframework.stereotype.Service;
 

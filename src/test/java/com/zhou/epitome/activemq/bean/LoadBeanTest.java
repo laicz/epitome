@@ -4,10 +4,8 @@
  */
 package com.zhou.epitome.activemq.bean;
 
-import com.zhou.epitome.bean.BeanConfig;
-import com.zhou.epitome.bean.Person;
+import com.zhou.epitome.spring.bean.BeanConfig;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * 2019/2/18  23:00

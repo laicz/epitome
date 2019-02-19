@@ -2,7 +2,7 @@
  * Date:     2019/2/1823:17
  * AUTHOR:   Administrator
  */
-package com.zhou.epitome.anno.cap2.dao;
+package com.zhou.epitome.spring.anno.cap2.dao;
 
 import org.springframework.stereotype.Repository;
 

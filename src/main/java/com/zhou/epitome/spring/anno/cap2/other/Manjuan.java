@@ -2,9 +2,9 @@
  * Date:     2019/2/1920:15
  * AUTHOR:   Administrator
  */
-package com.zhou.epitome.anno.cap2.other;
+package com.zhou.epitome.spring.anno.cap2.other;
 
-import com.zhou.epitome.anno.cap2.anno.MyImport;
+import com.zhou.epitome.spring.anno.cap2.anno.MyImport;
 
 /**
  * 2019/2/19  20:15

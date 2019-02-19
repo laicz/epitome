@@ -2,14 +2,11 @@
  * Date:     2019/2/1823:18
  * AUTHOR:   Administrator
  */
-package com.zhou.epitome.anno.cap2.config;
+package com.zhou.epitome.spring.anno.cap2.config;
 
-import com.zhou.epitome.anno.cap2.anno.MyImport;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.FilterType;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 2019/2/18  23:18
