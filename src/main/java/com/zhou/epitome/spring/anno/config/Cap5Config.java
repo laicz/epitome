@@ -17,12 +17,12 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class Cap5Config {
-    @Conditional(value = WindowCondition.class)
+    /*@Conditional(value = WindowCondition.class)
     @Bean("person")
     public Person person() {
         System.out.println("开始实例化.... person");
         return new Person("person", 20);
-    }
+    }*/
 
     @Conditional(LinuxCondition.class)
     @Bean("lison")
