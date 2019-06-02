@@ -1,0 +1,18 @@
+function接口定义了一个apply的方法，它接受一个泛型T的对象， 并返回一个泛型R的对象
+
+
+note:
+    java类型要么是引用类型的（Byte，Integer,Object,List）
+    要么是原始类型（int,double,byte,char），但是泛型只能绑定到引用类型，这是由泛型内部的实现方式造成的。
+    java还有一个自动装箱的机制来实现的，但是装箱的过程中是要付出性能的代价的，因此java8也提供了专门的版本，
+    以此来避免自动装箱和拆箱的操作
+
+    IntPredicate
+    IntFunction
+    IntConsumer
+    ...
+
+    异常、lambda、还有函数式接口
+    任何函数式接口都不允许抛出受检异常，如果需要在lambda中抛出异常，有两种办法：
+    声明一个自己的函数式接口，并声明受检异常，或者将lambda包裹在一个try/catch块中
+

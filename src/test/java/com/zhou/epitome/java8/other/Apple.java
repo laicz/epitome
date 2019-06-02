@@ -2,7 +2,7 @@
  * Date:     2019/5/216:35
  * AUTHOR:   Administrator
  */
-package com.zhou.epitome.java8;
+package com.zhou.epitome.java8.other;
 
 /**
  * 2019/5/2  16:35

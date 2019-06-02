@@ -2,17 +2,14 @@
  * Date:     2019/5/315:50
  * AUTHOR:   Administrator
  */
-package com.zhou.epitome.java8;
+package com.zhou.epitome.java8.other;
 
 import com.google.common.base.Function;
-import com.google.common.base.Supplier;
-import com.google.common.util.concurrent.RateLimiter;
 
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.function.Predicate;
 
 /**
  * 方法推导

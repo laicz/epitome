@@ -2,7 +2,7 @@
  * Date:     2019/5/317:17
  * AUTHOR:   Administrator
  */
-package com.zhou.epitome.java8;
+package com.zhou.epitome.java8.other;
 
 import java.util.*;
 import java.util.stream.Collectors;

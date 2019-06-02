@@ -2,7 +2,7 @@
  * Date:     2019/5/216:37
  * AUTHOR:   Administrator
  */
-package com.zhou.epitome.java8;
+package com.zhou.epitome.java8.other;
 
 import java.util.ArrayList;
 import java.util.Arrays;

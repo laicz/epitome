@@ -1,0 +1,2 @@
+predicate接口定义了一个名叫test的抽象方法
+接受泛型T对象，返回一个boolean对象
