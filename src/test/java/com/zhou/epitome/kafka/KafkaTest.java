@@ -4,20 +4,23 @@
  */
 package com.zhou.epitome.kafka;
 
+import org.apache.kafka.clients.consumer.ConsumerRebalanceListener;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
 import org.apache.kafka.common.PartitionInfo;
+import org.apache.kafka.common.TopicPartition;
+import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Properties;
+import java.time.Duration;
+import java.util.*;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
 
@@ -30,15 +33,25 @@ public class KafkaTest {
     private KafkaConsumer<String, String> kafkaConsumer;
     private static final String TOPIC_NAME = "test1";
 
+    /**
+     * 获取kafka生产者
+     */
     @Before
-    public void createClient() {
+    public void createProducer() {
         Properties kafkaProps = new Properties();
         kafkaProps.put("bootstrap.servers", "60.205.176.135:9092");
         kafkaProps.put("key.serializer", StringSerializer.class.getName());
         kafkaProps.put("value.serializer", StringSerializer.class.getName());
         kafkaProducer = new KafkaProducer<>(kafkaProps);
         kafkaProps.remove("key.serializer");
-//        kafkaConsumer = new KafkaConsumer<>(kafkaProps);
+    }
+
+    /**
+     * 获取kafka消费者
+     */
+    @Before
+    public void createConsumer() {
+        kafkaConsumer = getKafkaConsumer("test_group", TOPIC_NAME);
     }
 
     @Test
@@ -122,7 +135,46 @@ public class KafkaTest {
         });
     }
 
+    @Test
+    public void rollPollTopic() {
+        kafkaConsumer.subscribe(Collections.singleton(TOPIC_NAME), new ConsumerRebalanceListener() {
+            /**
+             * 该方法会在消费者停止读取数据之后，broker重新分配(reloadBalance)之前调用
+             * @param partitions
+             */
+            @Override
+            public void onPartitionsRevoked(Collection<TopicPartition> partitions) {
+                kafkaConsumer.commitSync();
+            }
+
+            /**
+             * 该方法会在broker重新分配之后，消费者重新读取数据之前调用
+             * @param partitions
+             */
+            @Override
+            public void onPartitionsAssigned(Collection<TopicPartition> partitions) {
+
+            }
+        });
+        while (true) {
+            ConsumerRecords<String, String> records = kafkaConsumer.poll(Duration.ofMillis(100L));
+            for (ConsumerRecord<String, String> record : records) {
+                System.out.println("--------------------------------------------------------------------------------------------");
+                System.out.println("key[" + record.key() + "]  :  value[" + record.value() + "]   :  offset[" + record.offset() + "]   :   partition:[" + record.partition() + "]");
+            }
+        }
+    }
+
     private int toPosition(int target) {
         return target & 0x7fffffff;
+    }
+
+    public KafkaConsumer getKafkaConsumer(final String groupId, String... topicName) {
+        Properties properties = new Properties();
+        properties.put("bootstrap.servers", "60.205.176.135:9092");
+        properties.put("group.id", groupId);
+        properties.put("key.deserializer", StringDeserializer.class.getName());
+        properties.put("value.deserializer", StringDeserializer.class.getName());
+        return new KafkaConsumer<>(properties);
     }
 }
