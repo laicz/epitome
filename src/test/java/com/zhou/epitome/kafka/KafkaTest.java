@@ -4,6 +4,7 @@
  */
 package com.zhou.epitome.kafka;
 
+import com.google.common.collect.ImmutableList;
 import org.apache.kafka.clients.consumer.ConsumerRebalanceListener;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
@@ -42,6 +43,7 @@ public class KafkaTest {
         kafkaProps.put("bootstrap.servers", "60.205.176.135:9092");
         kafkaProps.put("key.serializer", StringSerializer.class.getName());
         kafkaProps.put("value.serializer", StringSerializer.class.getName());
+        kafkaProps.put("linger.ms", 10000L);
         kafkaProducer = new KafkaProducer<>(kafkaProps);
         kafkaProps.remove("key.serializer");
     }
@@ -65,7 +67,7 @@ public class KafkaTest {
      * 会同时创建kafka的topic
      */
     @Test
-    public void testSendNotExistsTopic() {
+    public void testSendNotExistsTopic() throws InterruptedException {
         ProducerRecord<String, String> record = new ProducerRecord<>("not_exists_topic", "test_key1", "test_value");
         kafkaProducer.send(record);
     }
@@ -135,6 +137,9 @@ public class KafkaTest {
         });
     }
 
+    /**
+     * Rebalance：当发生rebalance时，如果存在还有被消费的offset还没有被提交，容易发生重复读的情况，需要在rebalance之前将offset进行提交
+     */
     @Test
     public void rollPollTopic() {
         kafkaConsumer.subscribe(Collections.singleton(TOPIC_NAME), new ConsumerRebalanceListener() {
@@ -161,6 +166,26 @@ public class KafkaTest {
             for (ConsumerRecord<String, String> record : records) {
                 System.out.println("--------------------------------------------------------------------------------------------");
                 System.out.println("key[" + record.key() + "]  :  value[" + record.value() + "]   :  offset[" + record.offset() + "]   :   partition:[" + record.partition() + "]");
+                kafkaConsumer.commitSync();
+            }
+        }
+    }
+
+    @Test
+    public void syncAndAsyncCommit() {
+        kafkaConsumer.subscribe(ImmutableList.of(TOPIC_NAME));
+        while (true) {
+            ConsumerRecords<String, String> records = kafkaConsumer.poll(Duration.ofMillis(100L));
+            for (ConsumerRecord<String, String> record : records) {
+                System.out.println("--------------------------------------------------------------------------------------------");
+                System.out.println("key[" + record.key() + "]  :  value[" + record.value() + "]   :  offset[" + record.offset() + "]   :   partition:[" + record.partition() + "]");
+            }
+            //处理完所有的业务，同步提交offset
+            try {
+                kafkaConsumer.commitSync();
+            } catch (Exception e) {
+                //如果发生异常，则异步提交offset，异步提交不会重试
+                kafkaConsumer.commitAsync();
             }
         }
     }
